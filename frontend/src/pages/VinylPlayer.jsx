@@ -237,7 +237,7 @@ const VinylPlayer = () => {
                                                 ? 'text-[#48bcb0] scale-[1.03] opacity-100 drop-shadow-[0_0_20px_rgba(72,188,176,0.5)]'
                                                 : lyricsData.hasTimestamps
                                                     ? 'text-white/5 opacity-5 blur-[2px]'
-                                                    : 'text-white/90 opaciy-100'}`}
+                                                    : 'text-white/90 opacity-100'}`}
                                     >
                                         {line.text}
                                     </p>
