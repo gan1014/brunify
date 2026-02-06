@@ -52,7 +52,7 @@ app.use((req, res, next) => {
 });
 
 // Health check route
-app.get('/api/health', (req, res) => {
+app.get(['/api/health', '/health'], (req, res) => {
   const dbStatus = mongoose.connection.readyState;
   const statusMap = {
     0: 'disconnected',
@@ -72,12 +72,12 @@ app.get('/api/health', (req, res) => {
 });
 
 // API Routes
-app.use('/api/songs', songRoutes);
-app.use('/api/auth', authRoutes);
-app.use('/api/playlists', playlistRoutes);
+app.use(['/api/songs', '/songs'], songRoutes);
+app.use(['/api/auth', '/auth'], authRoutes);
+app.use(['/api/playlists', '/playlists'], playlistRoutes);
 
 // Root route
-app.get('/', (req, res) => {
+app.get(['/api', '/'], (req, res) => {
   res.json({
     message: '🎵 Welcome to Spotify Clone API',
     version: '1.0.0',
