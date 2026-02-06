@@ -17,13 +17,17 @@ dotenv.config();
 // Initialize express app
 const app = express();
 
-// Connect to MongoDB
-connectDB();
+// Middleware to connect to DB lazily (Better for Vercel)
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    console.error('Database connection error in middleware:', err);
+    res.status(500).json({ success: false, message: 'Database connection failed' });
+  }
+});
 
-// Test Cloudinary connection
-testCloudinaryConnection();
-
-// Middleware
 // Middleware
 const allowedOrigins = [
   process.env.FRONTEND_URL,
