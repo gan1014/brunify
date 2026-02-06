@@ -47,35 +47,35 @@ const Player = () => {
 
     return (
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 animate-slide-up">
-            <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-3 pr-6 flex items-center gap-4 shadow-2xl min-w-[350px]">
+            <div className="bg-black/60 backdrop-blur-2xl border border-white/5 rounded-2xl p-3 pr-6 flex items-center gap-4 shadow-[0_20px_50px_rgba(0,0,0,0.5)] min-w-[350px]">
                 {/* Album Art (Overlapping) */}
-                <div className="relative -mt-8 size-16 shrink-0">
-                    <div className={`size-full rounded-full border-2 border-white/20 shadow-lg ${isPlaying ? 'animate-spin-slow' : ''}`}
+                <div className="relative -mt-10 size-16 shrink-0">
+                    <div className={`size-full rounded-full border-2 border-white/5 shadow-[0_0_20px_rgba(255,255,255,0.1)] ${isPlaying ? 'animate-spin-slow' : ''}`}
                         style={{
                             backgroundImage: `url(${currentSong.coverImageUrl})`,
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
                         }}
                     >
-                        <div className="absolute inset-0 bg-black/20 rounded-full" />
-                        <div className="absolute inset-0 m-auto size-4 bg-neutral-900 rounded-full border border-white/20" />
+                        <div className="absolute inset-0 bg-black/40 rounded-full" />
+                        <div className="absolute inset-0 m-auto size-4 bg-primary rounded-full border border-black/20" />
                     </div>
                 </div>
 
                 {/* Song Info */}
                 <div className="flex-1 min-w-0 flex flex-col justify-center mr-2">
-                    <p className="text-sm font-bold text-white truncate leading-tight">
+                    <p className="text-sm font-bold text-primary truncate leading-tight">
                         {currentSong.title}
                     </p>
-                    <p className="text-xs text-white/60 truncate">
+                    <p className="text-[10px] text-primary/40 truncate uppercase tracking-widest font-bold">
                         {currentSong.artist}
                     </p>
                 </div>
 
                 {/* Progress Bar (Mini) */}
-                <div className="absolute bottom-0 left-4 right-4 h-0.5 bg-white/10 rounded-full overflow-hidden">
+                <div className="absolute bottom-0 left-4 right-4 h-0.5 bg-white/5 rounded-full overflow-hidden">
                     <div
-                        className="h-full bg-primary rounded-full transition-all duration-300"
+                        className="h-full bg-primary rounded-full transition-all duration-300 shadow-[0_0_10px_rgba(255,255,255,0.5)]"
                         style={{ width: `${progress}%` }}
                     />
                 </div>
@@ -84,37 +84,37 @@ const Player = () => {
                 <div className="flex items-center gap-3">
                     <button
                         onClick={playPrevious}
-                        className="text-white/70 hover:text-white transition-colors"
+                        className="text-primary/40 hover:text-primary transition-colors"
                     >
                         <span className="material-symbols-outlined text-2xl">skip_previous</span>
                     </button>
 
                     <button
                         onClick={togglePlay}
-                        className="text-white hover:scale-105 transition-transform"
+                        className="text-primary hover:scale-110 transition-transform flex items-center justify-center p-2 rounded-full bg-white/5"
                     >
                         <span className="material-symbols-outlined text-3xl filled-icon">
-                            {isPlaying ? 'play_arrow' : 'play_arrow'}
+                            {isPlaying ? 'skull' : 'play_arrow'}
                         </span>
                     </button>
 
                     <button
                         onClick={playNext}
-                        className="text-white/70 hover:text-white transition-colors"
+                        className="text-primary/40 hover:text-primary transition-colors"
                     >
                         <span className="material-symbols-outlined text-2xl">skip_next</span>
                     </button>
 
                     {/* Like Button */}
                     <button
-                        className={`transition-colors ml-2 ${isLiked ? 'text-primary' : 'text-white/50 hover:text-primary'}`}
+                        className={`transition-colors ml-2 ${isLiked ? 'text-primary' : 'text-primary/20 hover:text-primary'}`}
                         onClick={() => toggleFavorite(currentSong._id)}
                     >
                         <span className="material-symbols-outlined text-xl">{isLiked ? 'favorite' : 'favorite_border'}</span>
                     </button>
 
                     <Link to="/player">
-                        <button className="text-white/50 hover:text-white transition-colors ml-1">
+                        <button className="text-primary/20 hover:text-primary transition-colors ml-1">
                             <span className="material-symbols-outlined text-xl">open_in_full</span>
                         </button>
                     </Link>

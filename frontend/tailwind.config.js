@@ -8,17 +8,20 @@ export default {
     theme: {
         extend: {
             colors: {
-                "primary": "#1db954",
-                "background-light": "#f6f8f7",
-                "background-dark": "#122017",
+                "primary": "#f9fafb", // Bone White
+                "primary-dark": "#9ca3af",
+                "background-dark": "#0a0a0a", // Deep Charcoal
+                "background-black": "#000000",
+                "accent": "#ef4444", // Optional blood red for highlights
             },
             fontFamily: {
-                "display": ["Inter", "sans-serif"]
+                "display": ["Inter", "sans-serif"],
+                "skull": ["Creepster", "cursive"] // Adding a more fitting font
             },
             borderRadius: {
-                "DEFAULT": "0.25rem",
-                "lg": "0.5rem",
-                "xl": "0.75rem",
+                "DEFAULT": "4px",
+                "lg": "8px",
+                "xl": "12px",
                 "full": "9999px"
             },
         },

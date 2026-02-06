@@ -55,13 +55,13 @@ const Sidebar = () => {
                 <div className="space-y-8">
                     {/* Logo */}
                     <div className={`flex flex-col gap-1 px-2 ${sidebarCollapsed ? 'items-center' : ''}`}>
-                        <h1 className="text-white text-xl font-bold tracking-tight flex items-center gap-2">
-                            <span className="material-symbols-outlined text-primary text-3xl filled-icon">graphic_eq</span>
+                        <h1 className="text-white text-3xl font-bold tracking-tight flex items-center gap-2 font-skull">
+                            <span className="material-symbols-outlined text-primary text-4xl filled-icon">skull</span>
                             {!sidebarCollapsed && 'Brunify'}
                         </h1>
                         {!sidebarCollapsed && (
-                            <p className="text-primary text-xs font-semibold tracking-widest uppercase opacity-80">
-                                Premium Audio
+                            <p className="text-primary/60 text-[10px] font-bold tracking-[0.2em] uppercase pl-1">
+                                Audio Remains
                             </p>
                         )}
                     </div>

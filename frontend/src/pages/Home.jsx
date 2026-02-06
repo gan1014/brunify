@@ -68,18 +68,18 @@ const Home = () => {
                     <div
                         className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
                         style={{
-                            backgroundImage: `linear-gradient(to top, rgba(18, 32, 23, 0.9) 0%, rgba(18, 32, 23, 0) 60%), url("https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1200&h=600&fit=crop")`
+                            backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0) 60%), url("https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=1200&h=600&fit=crop")`
                         }}
                     />
                     <div className="absolute inset-0 flex flex-col justify-end p-10">
                         <div className="glass-effect w-fit px-4 py-1 rounded-full mb-4">
                             <span className="text-xs font-bold tracking-widest uppercase">Featured Playlist</span>
                         </div>
-                        <h2 className="text-6xl font-black tracking-tighter mb-4">
-                            Your Music Journey
+                        <h2 className="text-7xl font-black tracking-tighter mb-4 font-skull">
+                            Sound from the Grave
                         </h2>
-                        <p className="text-white/80 max-w-lg text-lg font-medium leading-relaxed mb-6">
-                            Discover and enjoy the best collection of music streaming.
+                        <p className="text-primary/60 max-w-lg text-lg font-bold tracking-wide leading-relaxed mb-6">
+                            Experience the eternal collection of audio remains.
                         </p>
                         <div className="flex gap-4">
                             <button
@@ -160,8 +160,8 @@ const Home = () => {
                                 key={artist}
                                 className="flex items-center gap-4 bg-white/5 hover:bg-white/10 p-2 pr-6 rounded-xl cursor-pointer transition-all group"
                             >
-                                <div className="size-20 rounded-lg bg-neutral-800 flex items-center justify-center text-white/20">
-                                    <span className="material-symbols-outlined text-4xl">person</span>
+                                <div className="size-20 rounded-lg bg-neutral-900 border border-white/5 flex items-center justify-center text-primary/20">
+                                    <span className="material-symbols-outlined text-4xl filled-icon">skull</span>
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <p className="font-bold truncate group-hover:text-primary transition-colors">{artist}</p>
