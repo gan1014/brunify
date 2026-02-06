@@ -43,8 +43,9 @@ const allowedOrigins = [
 ].filter(Boolean);
 
 app.use(cors({
-  origin: true, // Allow all origins in production for compatibility
-  credentials: true
+  origin: '*', // Allow all for maximum compatibility
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json());
