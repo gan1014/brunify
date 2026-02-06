@@ -16,7 +16,7 @@ const Home = () => {
         fetchSongs();
     }, []);
 
-    const fetchSongs = async () => {
+    const fetchSongs = async (retries = 2) => {
         try {
             setLoading(true);
             const [recentResponse, allResponse] = await Promise.all([
@@ -27,6 +27,11 @@ const Home = () => {
             setRecentSongs(recentResponse.data?.data || []);
             setAllSongs(allResponse.data?.data || []);
         } catch (error) {
+            if (retries > 0) {
+                console.log(`Retrying fetch... (${retries} left)`);
+                setTimeout(() => fetchSongs(retries - 1), 2000);
+                return;
+            }
             console.error('Error fetching songs:', error);
             const errorMessage = error.response?.data?.message || error.message || 'Check your connection';
             toast.error(`Error: ${errorMessage}`);
