@@ -1,4 +1,5 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import connectDB from './config/db.js';
@@ -33,20 +34,7 @@ const allowedOrigins = [
 ].filter(Boolean);
 
 app.use(cors({
-  origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-
-    const isVercel = origin.endsWith('.vercel.app');
-    const isLocal = origin.includes('localhost') || origin.includes('127.0.0.1');
-
-    if (isVercel || isLocal || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      console.log('Blocked by CORS:', origin);
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: true, // Allow all origins in production for compatibility
   credentials: true
 }));
 
@@ -61,11 +49,21 @@ app.use((req, res, next) => {
 
 // Health check route
 app.get('/api/health', (req, res) => {
+  const dbStatus = mongoose.connection.readyState;
+  const statusMap = {
+    0: 'disconnected',
+    1: 'connected',
+    2: 'connecting',
+    3: 'disconnecting'
+  };
+
   res.status(200).json({
     success: true,
     message: 'Server is running',
-    timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV
+    dbStatus: statusMap[dbStatus] || 'unknown',
+    hasMongoUri: !!process.env.MONGODB_URI,
+    environment: process.env.NODE_ENV,
+    vercel: !!process.env.VERCEL
   });
 });
 

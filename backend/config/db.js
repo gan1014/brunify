@@ -1,17 +1,25 @@
 import mongoose from 'mongoose';
 
+let isConnected = false;
+
 const connectDB = async () => {
+    if (isConnected) {
+        return;
+    }
+
     try {
-        const conn = await mongoose.connect(process.env.MONGODB_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        if (!process.env.MONGODB_URI) {
+            console.error('❌ MONGODB_URI is not defined in environment variables');
+            return;
+        }
+
+        const conn = await mongoose.connect(process.env.MONGODB_URI);
+        isConnected = true;
 
         console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
-        console.log(`📊 Database Name: ${conn.connection.name}`);
     } catch (error) {
         console.error(`❌ Error connecting to MongoDB: ${error.message}`);
-        process.exit(1);
+        // In serverless, we don't want to exit the process as it kills the instance
     }
 };
 
