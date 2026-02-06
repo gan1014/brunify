@@ -24,11 +24,12 @@ const Home = () => {
                 songAPI.getAllSongs({ limit: 20 })
             ]);
 
-            setRecentSongs(recentResponse.data.data);
-            setAllSongs(allResponse.data.data);
+            setRecentSongs(recentResponse.data?.data || []);
+            setAllSongs(allResponse.data?.data || []);
         } catch (error) {
             console.error('Error fetching songs:', error);
-            toast.error('Failed to load songs');
+            const errorMessage = error.response?.data?.message || error.message || 'Check your connection';
+            toast.error(`Error: ${errorMessage}`);
         } finally {
             setLoading(false);
         }
