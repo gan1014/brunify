@@ -11,9 +11,10 @@ const CircularGallery = ({ items = [] }) => {
     const [startRotation, setStartRotation] = useState(0);
     const [activeIndex, setActiveIndex] = useState(0);
 
-    const radius = 300; // Radius of the circle
-    const itemWidth = 200;
-    const itemHeight = 280;
+    const isMobile = window.innerWidth < 768;
+    const radius = isMobile ? 180 : 300; // Radius of the circle
+    const itemWidth = isMobile ? 140 : 200;
+    const itemHeight = isMobile ? 220 : 280;
 
     // Calculate positions
     const getCardStyle = (index, totalItems) => {
@@ -53,11 +54,23 @@ const CircularGallery = ({ items = [] }) => {
 
     const handleMouseMove = (e) => {
         if (!isDragging) return;
-        const deltaX = e.pageX - startX;
+        const currentX = e.pageX || (e.touches && e.touches[0].pageX);
+        const deltaX = currentX - startX;
         if (Math.abs(deltaX) > 5) {
             wasDraggingRef.current = true;
         }
         setRotation(startRotation + deltaX * 0.5);
+    };
+
+    const handleTouchStart = (e) => {
+        setIsDragging(true);
+        setStartX(e.touches[0].pageX);
+        setStartRotation(rotation);
+        wasDraggingRef.current = false;
+    };
+
+    const handleTouchEnd = () => {
+        setIsDragging(false);
     };
 
     const handleCardClick = (item, index, e) => {
@@ -74,11 +87,14 @@ const CircularGallery = ({ items = [] }) => {
 
     return (
         <div
-            className="relative h-[600px] w-full overflow-hidden flex items-center justify-center perspective-1000"
+            className="relative h-[600px] w-full overflow-hidden flex items-center justify-center perspective-1000 touch-pan-y"
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleMouseMove}
+            onTouchEnd={handleTouchEnd}
             onWheel={handleWheel}
         >
             <div className="relative w-full h-full flex items-center justify-center transform-style-3d">
