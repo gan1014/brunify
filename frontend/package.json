@@ -20,6 +20,10 @@
         "autoprefixer": "^10.4.16",
         "postcss": "^8.4.32"
     },
+    "optionalDependencies": {
+        "@rollup/rollup-linux-x64-gnu": "^4.6.1",
+        "@rollup/rollup-linux-x64-musl": "^4.6.1"
+    },
     "scripts": {
         "dev": "vite",
         "build": "vite build",
