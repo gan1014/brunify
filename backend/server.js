@@ -14,6 +14,11 @@ import playlistRoutes from './routes/playlistRoutes.js';
 // Load environment variables
 dotenv.config();
 
+// Force production mode on Vercel
+if (process.env.VERCEL) {
+  process.env.NODE_ENV = 'production';
+}
+
 // Initialize express app
 const app = express();
 
