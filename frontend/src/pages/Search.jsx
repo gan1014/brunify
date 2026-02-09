@@ -46,11 +46,11 @@ const Search = () => {
     };
 
     return (
-        <div className="flex-1 p-8 text-white overflow-y-auto bg-gradient-to-b from-background-dark via-background-dark to-black h-full">
+        <div className="flex-1 p-4 lg:p-8 text-white overflow-y-auto bg-gradient-to-b from-background-dark via-background-dark to-black h-full pb-40">
             <div className="max-w-4xl mx-auto">
-                <h2 className="text-4xl font-black mb-8">Search</h2>
+                <h2 className="text-2xl lg:text-4xl font-black mb-6 lg:mb-8">Search</h2>
 
-                <div className="relative mb-12">
+                <div className="relative mb-8 lg:mb-12">
                     <span className="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-black/50">
                         search
                     </span>
@@ -59,7 +59,7 @@ const Search = () => {
                         placeholder="What do you want to listen to?"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full pl-12 pr-6 py-4 rounded-full bg-white text-black font-medium text-lg focus:outline-none focus:ring-4 focus:ring-primary/50 transition-all"
+                        className="w-full pl-12 pr-6 py-3 lg:py-4 rounded-full bg-white text-black font-medium text-base lg:text-lg focus:outline-none focus:ring-4 focus:ring-primary/50 transition-all shadow-xl"
                         autoFocus
                     />
                 </div>

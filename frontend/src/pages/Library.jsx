@@ -22,18 +22,18 @@ const Library = () => {
     };
 
     return (
-        <div className="flex-1 p-8 text-white overflow-y-auto bg-gradient-to-b from-background-dark via-background-dark to-black h-full">
-            <h2 className="text-4xl font-black mb-8">Your Library</h2>
+        <div className="flex-1 p-4 lg:p-8 text-white overflow-y-auto bg-gradient-to-b from-background-dark via-background-dark to-black h-full pb-40">
+            <h2 className="text-2xl lg:text-4xl font-black mb-6 lg:mb-8">Your Library</h2>
 
-            <div className="mb-8">
-                <div className="flex gap-4">
-                    <button className="px-4 py-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors text-sm font-bold">
+            <div className="mb-8 overflow-x-auto custom-scrollbar">
+                <div className="flex gap-3 lg:gap-4 min-w-max pb-2">
+                    <button className="px-4 py-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors text-xs lg:text-sm font-bold">
                         Playlists
                     </button>
-                    <button className="px-4 py-2 bg-transparent rounded-full hover:bg-white/10 transition-colors text-sm font-bold disabled:opacity-50">
+                    <button className="px-4 py-2 bg-transparent rounded-full hover:bg-white/10 transition-colors text-xs lg:text-sm font-bold disabled:opacity-50">
                         Albums
                     </button>
-                    <button className="px-4 py-2 bg-transparent rounded-full hover:bg-white/10 transition-colors text-sm font-bold disabled:opacity-50">
+                    <button className="px-4 py-2 bg-transparent rounded-full hover:bg-white/10 transition-colors text-xs lg:text-sm font-bold disabled:opacity-50">
                         Artists
                     </button>
                 </div>

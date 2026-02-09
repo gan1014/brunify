@@ -78,13 +78,13 @@ const LikedSongs = () => {
             </div>
 
             {/* Right Content Side - Song List */}
-            <div className="flex-1 overflow-y-auto p-12 md:p-20 scrollbar-hide">
+            <div className="flex-1 overflow-y-auto p-6 md:p-20 scrollbar-hide pb-40 lg:pb-20">
                 <div className="max-w-xl">
-                    <h1 className="text-4xl md:text-5xl font-black text-[#8A9578] mb-12 tracking-tighter decoration-[#8A9578] underline underline-offset-8">
+                    <h1 className="text-3xl md:text-5xl font-black text-[#8A9578] mb-8 lg:mb-12 tracking-tighter decoration-[#8A9578] underline underline-offset-8">
                         PLAYLIST!
                     </h1>
 
-                    <div className="space-y-8">
+                    <div className="space-y-6 md:space-y-8">
                         {likedSongs.length === 0 ? (
                             <div className="py-20 text-center">
                                 <span className="material-symbols-outlined text-[#8A9578]/20 text-6xl mb-4">music_note</span>
@@ -95,21 +95,21 @@ const LikedSongs = () => {
                             </div>
                         ) : (
                             likedSongs.map((song, index) => (
-                                <div key={song._id} className="flex items-center gap-8 group">
+                                <div key={song._id} className="flex items-center gap-4 md:gap-8 group">
                                     {/* Song Card */}
                                     <div
                                         onClick={() => handleSongClick(index)}
-                                        className={`flex-shrink-0 w-80 bg-[#A1A892] rounded-[30px] p-4 flex items-center gap-4 cursor-pointer hover:scale-[1.02] transition-transform shadow-lg ${currentSong?._id === song._id ? 'ring-4 ring-white/30' : ''}`}
+                                        className={`flex-1 md:flex-none md:w-80 bg-[#A1A892] rounded-2xl md:rounded-[30px] p-3 md:p-4 flex items-center gap-3 md:gap-4 cursor-pointer hover:scale-[1.02] transition-transform shadow-lg ${currentSong?._id === song._id ? 'ring-4 ring-white/30' : ''}`}
                                     >
                                         <div
-                                            className="size-20 rounded-2xl bg-cover bg-center shadow-md flex-shrink-0"
+                                            className="size-12 md:size-20 rounded-xl md:rounded-2xl bg-cover bg-center shadow-md flex-shrink-0"
                                             style={{ backgroundImage: `url(${song.coverImageUrl || song.coverImage})` }}
                                         />
                                         <div className="flex-1 min-w-0">
-                                            <p className="text-white font-bold text-lg truncate leading-tight">
+                                            <p className="text-white font-bold text-base md:text-lg truncate leading-tight">
                                                 {song.title?.toLowerCase()}
                                             </p>
-                                            <p className="text-white/70 text-sm font-medium truncate uppercase tracking-widest">
+                                            <p className="text-white/70 text-[10px] md:text-sm font-medium truncate uppercase tracking-widest">
                                                 {song.artist}
                                             </p>
                                         </div>
@@ -125,7 +125,7 @@ const LikedSongs = () => {
                                     {/* Like toggle */}
                                     <button
                                         onClick={(e) => handleLikeToggle(e, song._id)}
-                                        className="text-[#8A9578] hover:scale-125 transition-transform"
+                                        className="text-[#8A9578] hover:scale-125 transition-transform p-2"
                                     >
                                         <span className="material-symbols-outlined filled-icon">favorite</span>
                                     </button>

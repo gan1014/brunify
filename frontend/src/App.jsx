@@ -34,9 +34,11 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
 // Layout wrapper for pages with sidebar and player
 const Layout = ({ children }) => {
     return (
-        <div className="flex h-screen overflow-hidden">
+        <div className="flex flex-col lg:flex-row h-screen overflow-hidden bg-background-dark">
             <Sidebar />
-            {children}
+            <div className="flex-1 overflow-hidden relative">
+                {children}
+            </div>
             <Player />
         </div>
     );

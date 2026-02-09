@@ -7,6 +7,7 @@ const Sidebar = () => {
     const { user, logout } = useAuthStore();
     const { playlists, fetchUserPlaylists } = usePlaylistStore();
     const { sidebarCollapsed, toggleSidebar } = useUIStore();
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
     useEffect(() => {
         if (user) {
@@ -22,23 +23,143 @@ const Sidebar = () => {
         { path: '/library', icon: 'library_music', label: 'Your Library' },
     ];
 
+    const closeMobileMenu = () => setIsMobileMenuOpen(false);
+
     return (
         <>
             {/* Mobile Bottom Navigation */}
-            <div className="lg:hidden fixed bottom-20 left-4 right-4 z-50 flex items-center justify-around p-4 glass-effect rounded-2xl border border-white/10 shadow-2xl">
+            <div className="lg:hidden fixed bottom-6 left-4 right-4 z-50 flex items-center justify-around p-3 glass-effect rounded-2xl border border-white/10 shadow-2xl">
                 {navItems.map((item) => (
                     <Link
                         key={item.path}
                         to={item.path}
-                        className={`flex flex-col items-center gap-1 ${isActive(item.path) ? 'text-primary' : 'text-white/60'}`}
+                        onClick={closeMobileMenu}
+                        className={`flex flex-col items-center gap-1 transition-all ${isActive(item.path) ? 'text-primary scale-110' : 'text-white/60'}`}
                     >
                         <span className={`material-symbols-outlined text-2xl ${isActive(item.path) ? 'filled-icon' : ''}`}>
                             {item.icon}
                         </span>
-                        <span className="text-[10px] font-bold uppercase tracking-widest">{item.label.split(' ')[0]}</span>
+                        <span className="text-[8px] font-bold uppercase tracking-widest">{item.label.split(' ')[0]}</span>
                     </Link>
                 ))}
+                <button
+                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    className={`flex flex-col items-center gap-1 transition-all ${isMobileMenuOpen ? 'text-primary' : 'text-white/60'}`}
+                >
+                    <span className="material-symbols-outlined text-2xl">
+                        {isMobileMenuOpen ? 'close' : 'menu'}
+                    </span>
+                    <span className="text-[8px] font-bold uppercase tracking-widest">Menu</span>
+                </button>
             </div>
+
+            {/* Mobile Full Menu Overlay */}
+            {isMobileMenuOpen && (
+                <div className="lg:hidden fixed inset-0 z-[49] bg-black/95 backdrop-blur-xl animate-fadeIn p-8 flex flex-col pt-20">
+                    <div className="flex flex-col gap-1 mb-12">
+                        <h1 className="text-white text-4xl font-bold tracking-tight flex items-center gap-3 font-skull">
+                            <span className="material-symbols-outlined text-primary text-5xl filled-icon">skull</span>
+                            Brunify
+                        </h1>
+                        <p className="text-primary/60 text-xs font-bold tracking-[0.2em] uppercase pl-1">
+                            Audio Remains
+                        </p>
+                    </div>
+
+                    <div className="space-y-8 overflow-y-auto pb-40 custom-scrollbar">
+                        {/* Mobile Playlists Section */}
+                        <div className="space-y-4">
+                            <div className="flex items-center justify-between">
+                                <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest">
+                                    Your Playlists
+                                </p>
+                                <button
+                                    onClick={() => {
+                                        useUIStore.getState().setShowCreatePlaylistModal(true);
+                                        closeMobileMenu();
+                                    }}
+                                    className="text-primary"
+                                >
+                                    <span className="material-symbols-outlined">add</span>
+                                </button>
+                            </div>
+                            <div className="grid grid-cols-2 gap-3">
+                                <Link
+                                    to="/liked-songs"
+                                    onClick={closeMobileMenu}
+                                    className="bg-white/5 p-4 rounded-xl flex flex-col gap-3"
+                                >
+                                    <div className="size-8 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center">
+                                        <span className="material-symbols-outlined text-white text-xs filled-icon">favorite</span>
+                                    </div>
+                                    <span className="font-bold text-sm">Liked Songs</span>
+                                </Link>
+                                {playlists.map((playlist) => (
+                                    <Link
+                                        key={playlist._id}
+                                        to={`/playlist/${playlist._id}`}
+                                        onClick={closeMobileMenu}
+                                        className="bg-white/5 p-4 rounded-xl flex flex-col gap-3"
+                                    >
+                                        <div className="size-8 bg-white/10 rounded-lg flex items-center justify-center">
+                                            <span className="material-symbols-outlined text-white text-xs">queue_music</span>
+                                        </div>
+                                        <span className="font-bold text-sm truncate">{playlist.name}</span>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Mobile Actions */}
+                        <div className="space-y-4">
+                            <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest">
+                                Quick Actions
+                            </p>
+                            <div className="flex flex-col gap-2">
+                                {user?.role === 'admin' && (
+                                    <Link
+                                        to="/upload"
+                                        onClick={closeMobileMenu}
+                                        className="w-full py-4 px-6 bg-white/5 text-white font-bold rounded-2xl flex items-center gap-4"
+                                    >
+                                        <span className="material-symbols-outlined text-primary filled-icon">upload</span>
+                                        Upload Song
+                                    </Link>
+                                )}
+                                {user && !user.isPremium && (
+                                    <button
+                                        className="w-full py-4 px-6 bg-primary text-black font-bold rounded-2xl flex items-center gap-4"
+                                    >
+                                        <span className="material-symbols-outlined filled-icon">bolt</span>
+                                        Upgrade to Pro
+                                    </button>
+                                )}
+                                {user ? (
+                                    <button
+                                        onClick={() => {
+                                            logout();
+                                            closeMobileMenu();
+                                        }}
+                                        className="w-full py-4 px-6 border border-white/10 text-white font-bold rounded-2xl flex items-center gap-4"
+                                    >
+                                        <span className="material-symbols-outlined">logout</span>
+                                        Logout
+                                    </button>
+                                ) : (
+                                    <Link
+                                        to="/login"
+                                        onClick={closeMobileMenu}
+                                        className="w-full py-4 px-6 bg-white text-black font-bold rounded-2xl flex items-center gap-4"
+                                    >
+                                        <span className="material-symbols-outlined">login</span>
+                                        Login
+                                    </Link>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {/* Desktop Sidebar */}
             <aside className={`hidden lg:flex flex-shrink-0 bg-black/40 border-r border-white/5 flex-col justify-between p-6 transition-all duration-300 relative ${sidebarCollapsed ? 'w-24' : 'w-64'}`}>

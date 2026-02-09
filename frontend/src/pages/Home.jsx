@@ -61,24 +61,24 @@ const Home = () => {
     }
 
     return (
-        <main className="flex-1 overflow-y-auto bg-gradient-to-b from-background-dark via-background-dark to-black scroll-smooth pb-32">
+        <main className="flex-1 overflow-y-auto bg-gradient-to-b from-background-dark via-background-dark to-black scroll-smooth pb-40 lg:pb-32">
             {/* Hero Section */}
-            <div className="p-8">
-                <div className="relative group h-80 w-full overflow-hidden rounded-2xl">
+            <div className="p-4 lg:p-8">
+                <div className="relative group h-64 lg:h-80 w-full overflow-hidden rounded-2xl">
                     <div
                         className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
                         style={{
                             backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0) 60%), url("https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=1200&h=600&fit=crop")`
                         }}
                     />
-                    <div className="absolute inset-0 flex flex-col justify-end p-10">
-                        <div className="glass-effect w-fit px-4 py-1 rounded-full mb-4">
-                            <span className="text-xs font-bold tracking-widest uppercase">Featured Playlist</span>
+                    <div className="absolute inset-0 flex flex-col justify-end p-6 lg:p-10">
+                        <div className="glass-effect w-fit px-3 py-1 rounded-full mb-3 lg:mb-4">
+                            <span className="text-[10px] lg:text-xs font-bold tracking-widest uppercase text-white/80">Featured Playlist</span>
                         </div>
-                        <h2 className="text-7xl font-black tracking-tighter mb-4 font-skull">
+                        <h2 className="text-4xl lg:text-7xl font-black tracking-tighter mb-2 lg:mb-4 font-skull leading-none">
                             Sound from the Grave
                         </h2>
-                        <p className="text-primary/60 max-w-lg text-lg font-bold tracking-wide leading-relaxed mb-6">
+                        <p className="text-primary/60 max-w-lg text-sm lg:text-lg font-bold tracking-wide leading-relaxed mb-4 lg:mb-6 line-clamp-2 lg:line-clamp-none">
                             Experience the eternal collection of audio remains.
                         </p>
                         <div className="flex gap-4">
@@ -99,9 +99,9 @@ const Home = () => {
             </div>
 
             {/* Recently Played Section (Circular Gallery) */}
-            <section className="px-8 mb-10">
+            <section className="px-4 lg:px-8 mb-10 overflow-hidden">
                 <div className="flex items-center justify-between mb-0 px-2">
-                    <h3 className="text-2xl font-bold tracking-tight z-10 relative">Recently Added</h3>
+                    <h3 className="text-xl lg:text-2xl font-bold tracking-tight z-10 relative">Recently Added</h3>
                     <Link to="/library" className="text-sm font-bold text-white/40 hover:text-primary transition-colors z-10 relative">
                         Show all
                     </Link>
@@ -120,12 +120,12 @@ const Home = () => {
             </section>
 
             {/* Curated for You Section */}
-            <section className="px-8">
+            <section className="px-4 lg:px-8 pb-20 lg:pb-0">
                 <div className="flex items-center justify-between mb-6 px-2">
-                    <h3 className="text-2xl font-bold tracking-tight">Featured Artists</h3>
+                    <h3 className="text-xl lg:text-2xl font-bold tracking-tight">Featured Artists</h3>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
                     {allSongs.length > 0 ? (
                         // Get unique artists and their first song's cover as the artist image
                         Array.from(new Set(allSongs.map(s => s.artist))).slice(0, 6).map((artistName) => {
